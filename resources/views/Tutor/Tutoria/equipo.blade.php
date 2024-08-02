@@ -146,6 +146,26 @@
                     <td><button class="btn btn-success agregar-btn" data-id="1">Agregar</button></td>
                 </tr>
                 <!-- Agregar más filas según sea necesario -->
+                <tr>
+                    <td>PC</td>
+                    <td>LANIX</td>
+                    <td>TITAN</td>
+                    <td>4040</td>
+                    <td>1005849989</td>
+                    <td>Funcional</td>
+                    <td><button class="btn btn-info ver-btn" data-id="3">Ver</button></td>
+                    <td><button class="btn btn-success agregar-btn" data-id="4">Agregar</button></td>
+                </tr>
+                <tr>
+                    <td>PC</td>
+                    <td>LANIX</td>
+                    <td>TITAN</td>
+                    <td>4040</td>
+                    <td>1005849987</td>
+                    <td>Funcional</td>
+                    <td><button class="btn btn-info ver-btn" data-id="5">Ver</button></td>
+                    <td><button class="btn btn-success agregar-btn" data-id="6">Agregar</button></td>
+                </tr>
             </tbody>
         </table>
     </div>

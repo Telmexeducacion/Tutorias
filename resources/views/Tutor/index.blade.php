@@ -72,6 +72,7 @@
                     <th>Estatus</th>
                     <th>Contactar</th>
                     <th>Actualizar</th>
+                    <th>Ficha</th>
                 </tr>
             </thead>
             <tbody>
@@ -84,6 +85,8 @@
                     <td>{{$sede->estatus}}</td>
                     <td><a class="btn btn-primary llamar-btn" href="#" data-id="{{$sede->id}}" data-toggle="modal" data-target="#contactModal">Llamar</a></td>
                     <td><a class="btn btn-warning" href="{{route('contactos.form.update',$sede->clavebdt)}}">Actualizar</a></td>
+                    <td> <a class="btn" href="{{route('ficha.externa',$sede->clavebdt)}}" target="_blank" >Descargar</a></td>
+
                 </tr>
             @endforeach
 

@@ -37,7 +37,7 @@ Route::get('/Pruebas','pruebasController@index')->name('pruebas.index');
 
 Route::get('/Pruebas/form','pruebasController@formularioTelegram')->name('pruebas.form');
 
-Route::POST('/Pruebas/form-submit','pruebasController@StoreTelegram')->name('store.telegram');
+
 
 
 Route::get('/Tutoria/sede/{sede}','tutoriaController@panelInicio')->name('panel.tutoria');
@@ -73,7 +73,7 @@ Route::get('/info/mobiliario','DatosController@FormularioMobiliario')->name('car
 Route::post('/carga/mobiliario','DatosController@ImportarMobiliario')->name('import.mobiliario');
 
 
-Route::get('/ficha','ReporteController@inicio')->name('ficha.externa');
+Route::get('/ficha/{clavebdt}','ReporteController@inicio')->name('ficha.externa');
 
 
 

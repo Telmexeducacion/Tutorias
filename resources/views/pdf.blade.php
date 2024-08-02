@@ -17,7 +17,7 @@
         <table style="width: 100%;">
             <tr>
                 <td style="text-align: left;    width: 50%">Biblioteca Digital Telmex</td>
-             <!--   <td style="text-align: right;    width: 50%">Página [[page_cu]]/[[page_nb]]</td> -->
+                <td style="text-align: right;    width: 50%">Página [[page_cu]]/[[page_nb]]</td>
             </tr>
         </table>
     </page_footer>
@@ -30,8 +30,8 @@
             </td>
             <td colspan="1" style="width: 70%; text-align: right; margin:0px 10px 0px 0px;">
                 <p style="margin: 0; font-size: 25px; color: black;"><b>Biblioteca Digital TELMEX</b></p>
-                <p style="margin: 0; font-size: 19px; color: #00458B; text-transform: uppercase; word-wrap: break-word;"><b> Nombre bdt</b></p>
-                <p style="margin: 0; font-size: 16px; color: #808080;  text-transform: uppercase;  word-wrap: break-word;">Marzo 2024</p>
+                <p style="margin: 0; font-size: 19px; color: #00458B; text-transform: uppercase; word-wrap: break-word;"><b> {{$clave}} - {{$nombre}}</b></p>
+                <p style="margin: 0; font-size: 16px; color: #808080;  text-transform: uppercase;  word-wrap: break-word;">{{$mes}}  {{$anio}}</p>
             </td>
             <td colspan="1" style="width: 10%">   </td>
         </tr>
