@@ -132,7 +132,7 @@
             </div>
             <div class="col-md-4 mb-3">
                 <div class="card text-center h-100">
-                    <a href="{{route('tutoria.ficha',$sede->clavebdt)}}" class="text-decoration-none text-dark">
+                    <a href="{{route('ficha.externa')}}" class="text-decoration-none text-dark">
                         <div class="card-body">
                             <div class="icon">&#128229;</div>
                             <p class="card-text">Descargar Ficha</p>

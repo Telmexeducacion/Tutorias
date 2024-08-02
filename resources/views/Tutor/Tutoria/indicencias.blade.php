@@ -76,48 +76,53 @@
       <div class="col-12">
         <h1>Incidencias </h1>
         <div class="form-group">
-          <label for="libraryName">Nombre de la Biblioteca</label>
-          <input type="text" id="libraryName" class="form-control" value="Benito Juárez">
+          <label for="libraryName"> </label>
+          <input type="text" id="libraryName" class="form-control" value="" >
         </div>
         <button id="buscarBtn" class="btn btn-primary">Buscar</button>
         <table class="table table-striped mt-3">
           <thead>
             <tr>
-              <th>Clave</th>
-              <th>Nombre Matutino</th>
-              <th>Estado</th>
+              <th>Fecha</th>
+              <th>Detalle</th>
+
               <th>Folio reporte</th>
+              <th>Tipo</th>
               <th>Estatus</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>27TAADT008</td>
-              <td>PRIM. GRAL. PUB. LIC. BENITO JUÁREZ GARCÍA</td>
-              <td>TABASCO</td>
+              <td>27/08/2023</td>
+              <td>SIN INTERNET EN LA ZONA POR CAIDA DE ARBOL</td>
+
               <td>54859</td>
-              <td>Pendiente</td>
+              <td>INTERNET</td>
+              <td>EN PROCESO</td>
             </tr>
             <tr>
-              <td>22QUADT003</td>
-              <td>PRIM. GRAL. PUB. BENITO JUÁREZ</td>
-              <td>QUERÉTARO</td>
+              <td>28/08/2023</td>
+              <td>NO CARGA EL SISTEMA OPERATIVO</td>
+
               <td>78954</td>
-              <td>Finalizado</td>
+              <td>SISTEMA</td>
+              <td>FINALIZADO</td>
             </tr>
             <tr>
-              <td>15EMADT063</td>
-              <td>PRIM. GRAL. PUB. LIC. BENITO JUÁREZ</td>
-              <td>ESTADO DE MÉXICO</td>
+              <td>28/04/2022</td>
+              <td>NO ENCIENDE EL EQUIPO</td>
+
               <td><button class="btn btn-link btn-ingresar" data-toggle="modal" data-target="#folioModal" data-clave="15EMADT063">Ingresar</button></td>
-              <td>Pendiente</td>
+              <td>SISTEMA</td>
+              <td>PENDIENTE DE FOLIO</td>
             </tr>
             <tr>
-              <td>25SIADT026</td>
-              <td>PRIM. GRAL. PUB. LIC. BENITO JUÁREZ</td>
-              <td>CHIAPAS</td>
+              <td>28/07/2023</td>
+              <td>SIN INTERNET </td>
+
               <td><button class="btn btn-link btn-ingresar" data-toggle="modal" data-target="#folioModal" data-clave="25SIADT026">Ingresar</button></td>
-              <td>Pendiente</td>
+              <td>INTERNET</td>
+              <td>PENDIENTE DE FOLIO</td>
             </tr>
           </tbody>
         </table>
@@ -143,7 +148,7 @@
             </div>
             <div class="form-group">
               <label for="folio">Folio</label>
-              <input type="text" class="form-control" id="folio" value="9373227991">
+              <input type="text" class="form-control" id="folio" value="">
             </div>
             <div class="form-group">
               <label for="comentarios">Comentarios:</label>

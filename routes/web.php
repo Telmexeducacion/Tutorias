@@ -48,6 +48,8 @@ Route::get('/Tutoria/Equipos/{sede}','tutoriaController@equipos')->name('tutoria
 Route::get('/Tutoria/Edificio/{sede}','tutoriaController@edificio')->name('tutoria.edificio');
 Route::get('/Tutoria/VerFicha/{sede}','tutoriaController@ficha')->name('tutoria.ficha');
 
+Route::get('contacto{clave}','tutoresController@getContactos')->name('getContactos');
+Route::get('historico{clave}','tutoresController@getHistorico')->name('getHistorico');
 
 // modal pruebas
 // Route::get('/ejemplo1/{id}','tutoresController@HistoricoBDT');
@@ -71,11 +73,8 @@ Route::get('/info/mobiliario','DatosController@FormularioMobiliario')->name('car
 Route::post('/carga/mobiliario','DatosController@ImportarMobiliario')->name('import.mobiliario');
 
 
+Route::get('/ficha','ReporteController@inicio')->name('ficha.externa');
 
 
-
-
-Route::get('contacto{clave}','tutoresController@getContactos')->name('getContactos');
-Route::get('historico{clave}','tutoresController@getHistorico')->name('getHistorico');
 
 

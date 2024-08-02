@@ -56,281 +56,216 @@
             </div>
         </div>
     </nav>
-    <!-- Resto del contenido de la página -->
+
     <div class="container mt-4">
-        <!-- Additional content here -->
+        <h2>Estatus Equipos</h2>
+        <table class="table table-bordered" id="equiposTable">
+            <thead>
+                <tr>
+                    <th>Dispositivo</th>
+                    <th>Inicial</th>
+                    <th>Funcional</th>
+                    <th>Dañado</th>
+                    <th>Robado</th>
+                    <th>Observaciones</th>
+                    <th>Comentario</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>PC</td>
+                    <td>10</td>
+                    <td>8</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>Equipos lentos pero navegan en Internet</td>
+                    <td><button class="btn btn-primary comentario-btn" data-id="1">Comentario</button></td>
+                </tr>
+                <tr>
+                    <td>Laptop</td>
+                    <td>10</td>
+                    <td>9</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>Solo funcionan conectadas por cable</td>
+                    <td><button class="btn btn-primary comentario-btn" data-id="2">Comentario</button></td>
+                </tr>
+                <tr>
+                    <td>Netbook</td>
+                    <td>15</td>
+                    <td>9</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>Se encuentran un poco lentas</td>
+                    <td><button class="btn btn-primary comentario-btn" data-id="3">Comentario</button></td>
+                </tr>
+                <tr>
+                    <td>XO</td>
+                    <td>30</td>
+                    <td>0</td>
+                    <td>30</td>
+                    <td>0</td>
+                    <td>Fuera de servicio</td>
+                    <td><button class="btn btn-primary comentario-btn" data-id="4">Comentario</button></td>
+                </tr>
+                <tr>
+                    <td>Classmate</td>
+                    <td>10</td>
+                    <td>0</td>
+                    <td>10</td>
+                    <td>0</td>
+                    <td>Fuera de servicio</td>
+                    <td><button class="btn btn-primary comentario-btn" data-id="5">Comentario</button></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Detalle del Equipo</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Equipo</th>
+                    <th>Marca</th>
+                    <th>Modelo</th>
+                    <th>Número de Serie</th>
+                    <th>Resa</th>
+                    <th>Estatus</th>
+                    <th>Histórico</th>
+                    <th>Comentarios</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>PC</td>
+                    <td>LANIX</td>
+                    <td>TITAN</td>
+                    <td>4040</td>
+                    <td>1005849988</td>
+                    <td>Funcional</td>
+                    <td><button class="btn btn-info ver-btn" data-id="2">Ver</button></td>
+                    <td><button class="btn btn-success agregar-btn" data-id="1">Agregar</button></td>
+                </tr>
+                <!-- Agregar más filas según sea necesario -->
+            </tbody>
+        </table>
     </div>
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-<style>
-    .container {
-        margin-top: 20px;
-    }
 
-    .card {
-        padding: 20px;
-    }
-
-    .form-group {
-        margin-bottom: 15px;
-    }
-
-    .form-inline .form-group {
-        margin-right: 20px;
-    }
-
-    .table thead th {
-        vertical-align: middle;
-    }
-
-    .edit-icon {
-        cursor: pointer;
-    }
-
-    .editable-input {
-        border: none;
-        background-color: transparent;
-        pointer-events: none;
-    }
-
-    .editable-input:focus {
-        outline: none;
-        border-bottom: 1px solid black;
-        background-color: white;
-    }
-</style>
-
-
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-<style>
-    .edit-icon {
-        cursor: pointer;
-        margin-left: 10px;
-    }
-
-    .editable-input {
-        border: none;
-        background-color: transparent;
-        pointer-events: none;
-        width: 100px;
-    }
-
-    .editable-input:focus {
-        outline: none;
-        border-bottom: 1px solid black;
-        background-color: white;
-    }
-
-    .card {
-        padding: 20px;
-        margin-top: 20px;
-    }
-
-    .form-group {
-        margin-bottom: 20px;
-    }
-
-    .editable-div {
-        display: inline-flex;
-        align-items: center;
-    }
-
-    .inline-label {
-        margin-right: 10px;
-    }
-
-    .btn-container {
-        display: flex;
-        justify-content: space-between;
-    }
-</style>
-
-<div class="container">
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title text-center">Estatus Equipos</h5>
-            <div class="form-group">
-              <center>  <label>{{$sede->nombreMatutino}} | Clave {{$sede->clavebdt}}</label></center>
-            </div>
-
-            <!-- Equipo Entregado -->
-            <div class="form-group">
-                <h6>Equipo Entregado</h6>
-                <div class="form-row">
-                    <div class="col-md-4">
-                        <div class="editable-div">
-                            <label for="entregado-pc" class="inline-label">PC:</label>
-                            <input type="text" class="editable-input" id="entregado-pc" value="0" readonly>
-
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="editable-div">
-                            <label for="entregado-laptop" class="inline-label">Laptop:</label>
-                            <input type="text" class="editable-input" id="entregado-laptop" value="0" readonly>
-
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="editable-div">
-                            <label for="entregado-netbook" class="inline-label">Netbook:</label>
-                            <input type="text" class="editable-input" id="entregado-netbook" value="0" readonly>
-
-                        </div>
-                    </div>
+    <!-- Modal Comentario -->
+    <div class="modal fade" id="comentarioModal" tabindex="-1" role="dialog" aria-labelledby="comentarioModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="comentarioModalLabel">Agregar Comentario</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-            </div>
-
-            <!-- Equipo Funcional -->
-            <div class="form-group">
-                <h6>Equipo Funcional</h6>
-                <div class="form-row">
-                    <div class="col-md-4">
-                        <div class="editable-div">
-                            <label for="funcional-pc" class="inline-label">PC:</label>
-                            <input type="text" class="editable-input" id="funcional-pc" value="0" readonly>
-                            <span class="edit-icon" onclick="toggleEdit('funcional-pc')">&#9998;</span>
+                <div class="modal-body">
+                    <form id="comentarioForm">
+                        <div class="form-group">
+                            <label for="comentario">Comentario:</label>
+                            <textarea class="form-control" id="comentario" rows="3"></textarea>
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="editable-div">
-                            <label for="funcional-laptop" class="inline-label">Laptop:</label>
-                            <input type="text" class="editable-input" id="funcional-laptop" value="0" readonly>
-                            <span class="edit-icon" onclick="toggleEdit('funcional-laptop')">&#9998;</span>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="editable-div">
-                            <label for="funcional-netbook" class="inline-label">Netbook:</label>
-                            <input type="text" class="editable-input" id="funcional-netbook" value="0" readonly>
-                            <span class="edit-icon" onclick="toggleEdit('funcional-netbook')">&#9998;</span>
-                        </div>
-                    </div>
+                        <input type="hidden" id="comentarioId">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </form>
                 </div>
-            </div>
-
-            <!-- Equipo Dañado -->
-            <div class="form-group">
-                <h6>Equipo Dañado</h6>
-                <div class="form-row">
-                    <div class="col-md-4">
-                        <div class="editable-div">
-                            <label for="danado-pc" class="inline-label">PC:</label>
-                            <input type="text" class="editable-input" id="danado-pc" value="0" readonly>
-                            <span class="edit-icon" onclick="toggleEdit('danado-pc')">&#9998;</span>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="editable-div">
-                            <label for="danado-laptop" class="inline-label">Laptop:</label>
-                            <input type="text" class="editable-input" id="danado-laptop" value="0" readonly>
-                            <span class="edit-icon" onclick="toggleEdit('danado-laptop')">&#9998;</span>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="editable-div">
-                            <label for="danado-netbook" class="inline-label">Netbook:</label>
-                            <input type="text" class="editable-input" id="danado-netbook" value="0" readonly>
-                            <span class="edit-icon" onclick="toggleEdit('danado-netbook')">&#9998;</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Equipo Faltante -->
-            <div class="form-group">
-                <h6>Equipo Faltante</h6>
-                <div class="form-row">
-                    <div class="col-md-4">
-                        <div class="editable-div">
-                            <label for="faltante-pc" class="inline-label">PC:</label>
-                            <input type="text" class="editable-input" id="faltante-pc" value="0" readonly>
-                            <span class="edit-icon" onclick="toggleEdit('faltante-pc')">&#9998;</span>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="editable-div">
-                            <label for="faltante-laptop" class="inline-label">Laptop:</label>
-                            <input type="text" class="editable-input" id="faltante-laptop" value="0" readonly>
-                            <span class="edit-icon" onclick="toggleEdit('faltante-laptop')">&#9998;</span>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="editable-div">
-                            <label for="faltante-netbook" class="inline-label">Netbook:</label>
-                            <input type="text" class="editable-input" id="faltante-netbook" value="0" readonly>
-                            <span class="edit-icon" onclick="toggleEdit('faltante-netbook')">&#9998;</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Buttons -->
-            <div class="form-group btn-container">
-                <button class="btn btn-primary">Guardar Cambios</button>
-                <button class="btn btn-secondary">Continuar</button>
             </div>
         </div>
     </div>
-</div>
 
-<script>
-    function toggleEdit(elementId) {
-        var element = document.getElementById(elementId);
-        if (element) {
-            if (element.hasAttribute('readonly')) {
-                element.removeAttribute('readonly');
-                element.classList.remove('editable-input');
-                element.focus();
-            } else {
-                element.setAttribute('readonly', 'readonly');
-                element.classList.add('editable-input');
-            }
-        }
-    }
-</script>
+    <!-- Modal Ver -->
+    <div class="modal fade" id="verModal" tabindex="-1" role="dialog" aria-labelledby="verModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="verModalLabel">Detalle del Equipo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Aquí puedes mostrar los detalles del equipo -->
+                    <p>Detalles del equipo seleccionado con ID: <span id="verId"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <!-- Modal Agregar -->
+    <div class="modal fade" id="agregarModal" tabindex="-1" role="dialog" aria-labelledby="agregarModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="agregarModalLabel">Agregar Detalle</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="agregarForm">
+                        <div class="form-group">
+                            <label for="detalle">Detalle:</label>
+                            <textarea class="form-control" id="detalle" rows="3"></textarea>
+                        </div>
+                        <input type="hidden" id="agregarId">
+                        <button type="submit" class="btn btn-success">Agregar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
     <script>
-
-
         $(document).ready(function() {
-            $('.table').DataTable();
+            $('#equiposTable').DataTable();
+
+            // Evento para mostrar el modal de Comentario
+            $('.comentario-btn').on('click', function() {
+                const id = $(this).data('id');
+                $('#comentarioId').val(id);
+                $('#comentarioModal').modal('show');
+            });
+
+            // Evento para mostrar el modal Ver
+            $('.ver-btn').on('click', function() {
+                const id = $(this).data('id');
+                $('#verId').text(id);
+                $('#verModal').modal('show');
+            });
+
+            // Evento para mostrar el modal de Agregar
+            $('.agregar-btn').on('click', function() {
+                const id = $(this).data('id');
+                $('#agregarId').val(id);
+                $('#agregarModal').modal('show');
+            });
+
+            // Manejo de envío de formularios (puedes ajustar esto según sea necesario)
+            $('#comentarioForm').submit(function(event) {
+                event.preventDefault();
+                const comentario = $('#comentario').val();
+                const id = $('#comentarioId').val();
+                // Aquí iría la lógica para guardar el comentario
+                alert('Comentario guardado para el ID ' + id + ': ' + comentario);
+                $('#comentarioModal').modal('hide');
+            });
+
+            $('#agregarForm').submit(function(event) {
+                event.preventDefault();
+                const detalle = $('#detalle').val();
+                const id = $('#agregarId').val();
+                // Aquí iría la lógica para agregar el detalle
+                alert('Detalle agregado para el ID ' + id + ': ' + detalle);
+                $('#agregarModal').modal('hide');
+            });
         });
     </script>
-
-<script>
-    $(document).ready(function() {
-        // Inicializar DataTable
-        $('.table').DataTable();
-
-        // Evento de clic en el botón "Actualizar"
-        $('.btn-primary').on('click', function() {
-            // Obtener la fila
-            var $row = $(this).closest('tr');
-            var tipo = $row.find('td').eq(0).text();
-            var cantidad = $row.find('td').eq(1).text();
-            var funcional = $row.find('td').eq(2).text();
-            var danado = $row.find('td').eq(3).text();
-            var faltante = $row.find('td').eq(4).text();
-
-            // Llenar el modal con los valores actuales
-            $('#tipo').val(tipo);
-            $('#cantidad').val(cantidad);
-            $('#funcional').val(funcional);
-            $('#danado').val(danado);
-            $('#faltante').val(faltante);
-
-            // Mostrar el modal
-            $('#updateModal').modal('show');
-        });
-
-
-    });
-</script>
 </body>
 </html>
