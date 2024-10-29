@@ -8,27 +8,30 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        /* Estilo para la barra de navegación */
         .navbar-telmex {
-            background-color: #0075c9; /* Azul Telmex */
+            background-color: #0075c9;
         }
 
         .navbar-brand, .nav-link {
-            color: white !important; /* Texto blanco en la barra de navegación */
+            color: white !important;
         }
 
         .dropdown-menu {
-            background-color: white; /* Fondo blanco para el menú desplegable */
-            border: 1px solid #cccccc; /* Borde gris claro */
+            background-color: white;
+            border: 1px solid #cccccc;
         }
 
         .dropdown-item {
-            color: black !important; /* Texto negro para las opciones del menú */
+            color: black !important;
         }
 
         .dropdown-item:hover {
-            background-color: #f1f1f1; /* Fondo gris claro al pasar el ratón */
-            color: black !important; /* Asegura que el texto siga siendo visible */
+            background-color: #f1f1f1;
+            color: black !important;
+        }
+
+        .is-invalid {
+            border-color: red;
         }
     </style>
 </head>
@@ -56,248 +59,310 @@
             </div>
         </div>
     </nav>
-    <!-- Resto del contenido de la página -->
+
     <div class="container mt-4">
         <!-- Additional content here -->
     </div>
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-<style>
-    .container {
-        margin-top: 20px;
-    }
 
-    .card {
-        padding: 20px;
-    }
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            margin-top: 20px;
+        }
 
-    .form-group {
-        margin-bottom: 15px;
-    }
+        .card {
+            padding: 20px;
+        }
 
-    .form-inline .form-group {
-        margin-right: 20px;
-    }
+        .form-group {
+            margin-bottom: 15px;
+        }
 
-    .table thead th {
-        vertical-align: middle;
-    }
+        .form-inline .form-group {
+            margin-right: 20px;
+        }
 
-    .edit-icon {
-        cursor: pointer;
-    }
+        .table thead th {
+            vertical-align: middle;
+        }
 
-    .editable-input {
-        border: none;
-        background-color: transparent;
-        pointer-events: none;
-    }
+        .edit-icon {
+            cursor: pointer;
+        }
 
-    .editable-input:focus {
-        outline: none;
-        border-bottom: 1px solid black;
-        background-color: white;
-    }
-</style>
+        .editable-input {
+            border: none;
+            background-color: transparent;
+            pointer-events: none;
+        }
 
-<div class="container">
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title text-center">Infraestructura y Señalética</h5>
-            <div class="form-group">
-                <label> {{$sede->nombreMatutino}} | Clave {{$sede->clavebdt}}</label>
-            </div>
-            <form>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="kit-senalizacion">Kit Señalización</label>
-                        <select id="kit-senalizacion" class="form-control">
-                            <option value="" selected disabled>Seleccione</option>
-                            <option value="Completo">Completo</option>
-                            <option value="Incompleto">Incompleto</option>
-                            <option value="Sin Kit">Sin Kit</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="estatus-edificio">Estatus Edificio</label>
-                        <select id="estatus-edificio" class="form-control">
-                            <option value="" selected disabled>Seleccione</option>
-                            <option value="Dañado">Dañado</option>
-                            <option value="Funcional">Funcional</option>
-                        </select>
-                    </div>
+        .editable-input:focus {
+            outline: none;
+            border-bottom: 1px solid black;
+            background-color: white;
+        }
+    </style>
+
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title text-center">Infraestructura y Señalética</h5>
+                <div class="form-group">
+                    <label> {{$sede->nombreMatutino}} | Clave {{$sede->clavebdt}}</label>
                 </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="pintura-interior">Pintura Interior</label>
-                        <select id="pintura-interior" class="form-control">
-                            <option value="" selected disabled>Seleccione</option>
-                            <option value="Buen estado">Buen estado</option>
-                            <option value="Desgastado">Desgastado</option>
-                            <option value="Sin imagen Institucional">Sin imagen Institucional</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="pintura-exterior">Pintura Exterior</label>
-                        <select id="pintura-exterior" class="form-control">
-                            <option value="" selected disabled>Seleccione</option>
-                            <option value="Buen estado">Buen estado</option>
-                            <option value="Desgastado">Desgastado</option>
-                            <option value="Sin imagen Institucional">Sin imagen Institucional</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="electricidad">Electricidad</label>
-                        <select id="electricidad" class="form-control">
-                            <option value="" selected disabled>Seleccione</option>
-                            <option value="Funcional">Funcional</option>
-                            <option value="Dañado">Dañado</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="mobiliario">Mobiliario</label>
-                        <select id="mobiliario" class="form-control">
-                            <option value="" selected disabled>Seleccione</option>
-                            <option value="Funcional">Funcional</option>
-                            <option value="Dañado">Dañado</option>
-                            <option value="En Mantenimiento">En Mantenimiento</option>
-                        </select>
-                    </div>
-                </div>
-            </form>
-            <table class="table table-bordered mt-4">
-                <thead>
-                    <tr>
-                        <th>Tipo</th>
-                        <th>Cantidad</th>
-                        <th>Funcional</th>
-                        <th>Dañado</th>
-                        <th>Faltante</th>
-                        <th>Editar</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($sede->mobiliarios as $equipo )
-                        <tr>
-                            <td>{{$equipo->tipo}}</td>
-                            <td>{{$equipo->cantidad}}</td>
-                            <td>{{$equipo->funcional}}</td>
-                            <td>{{$equipo->dañado}}</td>
-                            <td>{{$equipo->faltante}}</td>
-                            <td><button class="btn btn-primary btn-sm">Actualizar</button></td>
-                        </tr>
+                <form id="edificios-form">
+                    @foreach ($sede->edificios as $edificio)
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="señalizacion-{{ $edificio->id }}">Kit Señalización</label>
+                                <select id="señalizacion-{{ $edificio->id }}" class="form-control" name="señalizacion[{{ $edificio->id }}]">
+
+                                    <option value="COMPLETO" {{ $edificio->señalizacion == 'COMPLETO' ? 'selected' : '' }}>COMPLETO</option>
+                                    <option value="INCOMPLETO" {{ $edificio->señalizacion == 'INCOMPLETO' ? 'selected' : '' }}>INCOMPLETO</option>
+                                    <option value="SIN SEÑALIZACIÓN" {{ $edificio->señalizacion == 'SIN SEÑALIZACIÓN' ? 'selected' : '' }}>SIN SEÑALIZACIÓN</option>
+                                    <option value="SIN INFORMACION" {{ $edificio->señalizacion == 'SIN INFORMACION' ? 'selected' : '' }}>SIN INFORMACION</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="edificio-{{ $edificio->id }}">Estatus Edificio</label>
+                                <select id="edificio-{{ $edificio->id }}" class="form-control" name="edificio[{{ $edificio->id }}]">
+
+                                    <option value="DAÑADA" {{ $edificio->edificio == 'DAÑADA' ? 'selected' : '' }}>DAÑADA</option>
+                                    <option value="DESGASTADA" {{ $edificio->edificio == 'DESGASTADA' ? 'selected' : '' }}>DESGASTADA</option>
+                                    <option value="FUNCIONAL" {{ $edificio->edificio == 'FUNCIONAL' ? 'selected' : '' }}>FUNCIONAL</option>
+                                    <option value="REMODELACION" {{ $edificio->edificio == 'REMODELACION' ? 'selected' : '' }}>REMODELACION</option>
+                                    <option value="SIN INFORMACION" {{ $edificio->edificio == 'SIN INFORMACION' ? 'selected' : '' }}>SIN INFORMACION</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="pintura-interior-{{ $edificio->id }}">Pintura Interior</label>
+                                <select id="pintura-interior-{{ $edificio->id }}" class="form-control" name="pintura_interior[{{ $edificio->id }}]">
+
+                                    <option value="BUEN ESTADO" {{ $edificio->pintura_interior == 'BUEN ESTADO' ? 'selected' : '' }}>BUEN ESTADO</option>
+                                    <option value="DESGASTADO" {{ $edificio->pintura_interior == 'DESGASTADO' ? 'selected' : '' }}>DESGASTADO</option>
+                                    <option value="SIN IMAGEN INSTITUCIONAL" {{ $edificio->pintura_interior == 'SIN IMAGEN INSTITUCIONAL' ? 'selected' : '' }}>SIN IMAGEN INSTITUCIONAL</option>
+                                    <option value="SIN INFORMACION" {{ $edificio->pintura_interior == 'SIN INFORMACION' ? 'selected' : '' }}>SIN INFORMACION</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="pintura-exterior-{{ $edificio->id }}">Pintura Exterior</label>
+                                <select id="pintura-exterior-{{ $edificio->id }}" class="form-control" name="pintura_exterior[{{ $edificio->id }}]">
+
+                                    <option value="BUEN ESTADO" {{ $edificio->pintura_exterior == 'BUEN ESTADO' ? 'selected' : '' }}>BUEN ESTADO</option>
+                                    <option value="DESGASTADO" {{ $edificio->pintura_exterior == 'DESGASTADO' ? 'selected' : '' }}>DESGASTADO</option>
+                                    <option value="SIN IMAGEN INSTITUCIONAL" {{ $edificio->pintura_exterior == 'SIN IMAGEN INSTITUCIONAL' ? 'selected' : '' }}>SIN IMAGEN INSTITUCIONAL</option>
+                                    <option value="SIN INFORMACION" {{ $edificio->pintura_exterior == 'SIN INFORMACION' ? 'selected' : '' }}>SIN INFORMACION</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="electricidad-{{ $edificio->id }}">Electricidad</label>
+                                <select id="electricidad-{{ $edificio->id }}" class="form-control" name="electricidad[{{ $edificio->id }}]">
+
+                                    <option value="FUNCIONAL" {{ $edificio->electricidad == 'FUNCIONAL' ? 'selected' : '' }}>FUNCIONAL</option>
+                                    <option value="DAÑADO" {{ $edificio->electricidad == 'DAÑADO' ? 'selected' : '' }}>DAÑADO</option>
+                                    <option value="SIN INFORMACION" {{ $edificio->electricidad == 'SIN INFORMACION' ? 'selected' : '' }}>SIN INFORMACION</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="mobiliario-{{ $edificio->id }}">Mobiliario</label>
+                                <select id="mobiliario-{{ $edificio->id }}" class="form-control" name="mobiliario[{{ $edificio->id }}]">
+
+                                    <option value="FUNCIONAL" {{ $edificio->mobiliario == 'FUNCIONAL' ? 'selected' : '' }}>FUNCIONAL</option>
+                                    <option value="DAÑADO" {{ $edificio->mobiliario == 'DAÑADO' ? 'selected' : '' }}>DAÑADO</option>
+                                    <option value="EN MANTENIMIENTO" {{ $edificio->mobiliario == 'EN MANTENIMIENTO' ? 'selected' : '' }}>EN MANTENIMIENTO</option>
+                                    <option value="SIN INFORMACION" {{ $edificio->mobiliario == 'SIN INFORMACION' ? 'selected' : '' }}>SIN INFORMACION</option>
+                                </select>
+                            </div>
+                        </div>
                     @endforeach
-
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-
-<!-- Modal Actualizar -->
-<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="updateModalLabel">Actualizar Valores</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="updateForm">
-                    <div class="form-group">
-                        <label for="tipo">Tipo</label>
-                        <input type="text" class="form-control" id="tipo" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="cantidad">Cantidad</label>
-                        <input type="number" class="form-control" disabled id="cantidad">
-                    </div>
-                    <div class="form-group">
-                        <label for="funcional">Funcional</label>
-                        <input type="number" class="form-control" id="funcional">
-                    </div>
-                    <div class="form-group">
-                        <label for="danado">Dañado</label>
-                        <input type="number" class="form-control" id="danado">
-                    </div>
-                    <div class="form-group">
-                        <label for="faltante">Faltante</label>
-                        <input type="number" class="form-control" id="faltante">
-                    </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" id="saveChanges">Guardar Cambios</button>
+
+                <table class="table table-bordered mt-4">
+                    <thead>
+                        <tr>
+
+                            <th>Tipo</th>
+                            <th>Cantidad</th>
+                            <th>Funcional</th>
+                            <th>Dañado</th>
+                            <th>Faltante</th>
+                            <th>Editar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($sede->mobiliarios as $equipo )
+                            @if ($equipo->cantidad != 0)
+                                <tr>
+
+                                    <td>{{$equipo->tipo}}</td>
+                                    <td>{{$equipo->cantidad}}</td>
+                                    <td>{{$equipo->funcional}}</td>
+                                    <td>{{$equipo->dañado}}</td>
+                                    <td>{{$equipo->faltante}}</td>
+                                    <td><button class="btn btn-primary btn-sm" data-toggle="modal"  data-target="#updateModal" onclick="SetID('{{$equipo->id}}')">Actualizar</button></td>
+                                </tr>
+                            @endif
+                        @endforeach
+
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
-</div>
 
-    <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- Modal Actualizar -->
+    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateModalLabel">Actualizar Valores</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="updateForm" action="{{route('actualizar.mobiliario')}}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="bandera" name="id" readonly hidden>
+                        </div>
+                        <div class="form-group">
+                            <label for="tipo">Tipo</label>
+                            <input type="text" class="form-control" id="tipo" name="tipo" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="cantidad">Cantidad</label>
+                            <input type="number" class="form-control" id="cantidad" name="cantidad" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="funcional">Funcional</label>
+                            <input type="number" class="form-control" id="funcional" name="funcional" >
+                        </div>
+                        <div class="form-group">
+                            <label for="dañado">Dañado</label>
+                            <input type="number" class="form-control" id="dañado" name="dañado" >
+                        </div>
+                        <div class="form-group">
+                            <label for="faltante">Faltante</label>
+                            <input type="number" class="form-control" id="faltante" name="faltante">
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="saveChanges">Guardar cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include jQuery, DataTables, and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
     <script>
-        function setLine(line) {
-            document.getElementById('lineaInfinium').value = line;
+        function SetID(line) {
+            document.getElementById('bandera').value = line;
         }
 
         $(document).ready(function() {
-            $('.table').DataTable();
+            // Initialize DataTable
+          //  $('table').DataTable();
+
+            // Populate modal with row data
+            $('button[data-target="#updateModal"]').on('click', function() {
+                var row = $(this).closest('tr');
+                var tipo = row.find('td').eq(0).text();
+                var cantidad = row.find('td').eq(1).text();
+                var funcional = row.find('td').eq(2).text();
+                var danado = row.find('td').eq(3).text();
+                var faltante = row.find('td').eq(4).text();
+
+
+                $('#tipo').val(tipo);
+                $('#cantidad').val(cantidad);
+                $('#funcional').val(funcional);
+                $('#dañado').val(danado);
+                $('#faltante').val(faltante);
+            });
+
+            // Validate and save changes
+            $('#saveChanges').on('click', function() {
+                var cantidad = parseInt($('#cantidad').val());
+                var funcional = parseInt($('#funcional').val());
+                var danado = parseInt($('#dañado').val());
+                var faltante = parseInt($('#faltante').val());
+
+                // Ensure values are non-negative integers
+                if (isNaN(funcional) || isNaN(danado) || isNaN(faltante) || funcional < 0 || danado < 0 || faltante < 0) {
+                    alert('Por favor, ingrese valores válidos para Funcional, Dañado y Faltante.');
+                    return;
+                }
+
+                // Ensure total does not exceed cantidad
+                if (funcional + danado + faltante > cantidad) {
+                    alert('La suma de Funcional, Dañado y Faltante no puede exceder la Cantidad total.');
+                    $('#funcional, #dañado, #faltante').addClass('is-invalid');
+                }else if( funcional + danado + faltante < cantidad){
+                    alert('Falta Mobiliario.');
+                    $('#funcional, #dañado, #faltante').addClass('is-invalid');
+                } else {
+                    $('#funcional, #dañado, #faltante').removeClass('is-invalid');
+
+                    document.getElementById('updateForm').submit();
+                    alert('Mobiliario actualizado');
+
+
+
+
+
+                    // Close modal
+                    $('#updateModal').modal('hide');
+                }
+            });
         });
     </script>
 
+
 <script>
-    $(document).ready(function() {
-        // Inicializar DataTable
-        $('.table').DataTable();
+        $(document).ready(function() {
+            $('#edificios-form select').change(function() {
+                var select = $(this);
+                var edificioId = select.attr('id').split('-').pop();  // Extract the edificio ID from the select ID
+                var field = select.attr('name').split('[')[0];  // Extract the field name
 
-        // Evento de clic en el botón "Actualizar"
-        $('.btn-primary').on('click', function() {
-            // Obtener la fila
-            var $row = $(this).closest('tr');
-            var tipo = $row.find('td').eq(0).text();
-            var cantidad = $row.find('td').eq(1).text();
-            var funcional = $row.find('td').eq(2).text();
-            var danado = $row.find('td').eq(3).text();
-            var faltante = $row.find('td').eq(4).text();
+                var data = {
+                    _token: '{{ csrf_token() }}',
+                    id: edificioId,
+                    field: field,
+                    value: select.val()
+                };
 
-            // Llenar el modal con los valores actuales
-            $('#tipo').val(tipo);
-            $('#cantidad').val(cantidad);
-            $('#funcional').val(funcional);
-            $('#danado').val(danado);
-            $('#faltante').val(faltante);
-
-            // Mostrar el modal
-            $('#updateModal').modal('show');
+                $.ajax({
+                    url: '{{ route('actualizar.edificio') }}',
+                    type: 'POST',
+                    data: data,
+                    success: function(response) {
+                        alert('El edificio ha sido actualizado correctamente.');
+                       // console.log(response);
+                    },
+                    error: function(response) {
+                        alert('Ocurrió un error al actualizar el edificio.');
+                        //console.log(response);
+                    }
+                });
+            });
         });
-
-        // Guardar los cambios
-        $('#saveChanges').on('click', function() {
-            // Obtener los valores del formulario
-            var tipo = $('#tipo').val();
-            var cantidad = $('#cantidad').val();
-            var funcional = $('#funcional').val();
-            var danado = $('#danado').val();
-            var faltante = $('#faltante').val();
-
-            // Encontrar la fila correspondiente y actualizar los valores
-            var $row = $('.table').find('tr:contains("' + tipo + '")');
-            $row.find('td').eq(1).text(cantidad);
-            $row.find('td').eq(2).text(funcional);
-            $row.find('td').eq(3).text(danado);
-            $row.find('td').eq(4).text(faltante);
-
-            // Cerrar el modal
-            $('#updateModal').modal('hide');
-        });
-    });
 </script>
+
 </body>
 </html>

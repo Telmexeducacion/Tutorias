@@ -102,17 +102,38 @@ class tutoresController extends Controller
     }
 
     public function getHistorico($id){
- ///Mejorar para que no se vea solo uno si no todos los contactos en forma de tabla
+ ///Mejorar para que no se vea solo uno si no todos los comentarios  en forma de tabla
 
-        $dependencia = Contacto::where('id_biblioteca', $id)->first();
+        $dependencia = Contacto::where('id_biblioteca', $id)->get();
 
-        $tutor = User::where('id',$dependencia->id_tutor)->first();
-        $dato = [
-            'tutor'=>$tutor->name,
-            'fecha'=>$dependencia->created_at->format('d-m-Y'),
-            'estado' => $dependencia->estado,
-            'comentarios' =>$dependencia->comentarios,
-        ];
+
+        $dato = [];
+
+        foreach($dependencia as $datos){
+            $tutor = User::where('id',$datos->id_tutor)->first();
+            $name =  $tutor->name;
+            $partes = explode(' ', $name);
+            // Asegurarse de que siempre se tiene al menos un nombre y un apellido
+            $primer_nombre = isset($partes[2]) ? $partes[2] : $partes[0]; // Si hay más de un nombre
+            $primer_apellido = $partes[0]; // Siempre el primer apellido
+
+            $nombre_corto = $primer_nombre . ' ' . $primer_apellido;
+
+            $dato[] = [
+                'tutor' =>  $nombre_corto,
+                'fecha' => $datos->created_at->format('d-m-Y'),
+                'estado' => $datos->estado,
+                'comentarios' => $datos->comentarios
+            ];
+        }
+
+
+
+
+
+
+
+
 
 
         if ($dato) {

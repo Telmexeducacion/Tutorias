@@ -5,11 +5,15 @@ Use App\Biblioteca;
 use Illuminate\Http\Request;
 use Spipu\Html2Pdf\Html2Pdf;
 use Carbon\Carbon;
+use App\Exports\EstatusBDTExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 setlocale(LC_TIME, 'es_ES.UTF-8');
 class ReporteController extends Controller{
 
-
+    public function panel(){
+        return view('Reportes.panel');
+    }
 
     public function inicio($clave){
 
@@ -70,6 +74,99 @@ class ReporteController extends Controller{
         } else {
             return "Mes no válido"; // En caso de que no se encuentre el mes
         }
+    }
+
+
+
+
+
+
+
+	public function semana(){
+
+
+		 $mes = $this->traducirMes(Carbon::now()->month);
+        $anio = Carbon::now()->year;
+
+		 $data = [
+
+            'mes' =>$mes,
+            'anio'=>$anio
+        ];
+
+
+        // Renderiza la vista con los datos y convierte a HTML
+        $html = view('semana', $data)->render();
+
+        // Configura y genera el PDF
+        $html2pdf = new Html2Pdf('P','A4','es','true','UTF-8',array(3,2,3,2));
+        $html2pdf->writeHTML($html);
+         // Obtener el contenido del PDF
+        return $html2pdf->output('Semana.pdf');
+
+
+
+    }
+
+
+    public function quincena(){
+
+
+		 $mes = $this->traducirMes(Carbon::now()->month);
+         $anio = Carbon::now()->year;
+
+          $data = [
+
+             'mes' =>$mes,
+             'anio'=>$anio
+         ];
+
+
+         // Renderiza la vista con los datos y convierte a HTML
+         $html = view('quincena', $data)->render();
+
+         // Configura y genera el PDF
+         $html2pdf = new Html2Pdf('L', array(279, 432), 'es', true, 'UTF-8', array(1, 2, 1, 2));
+         $html2pdf->writeHTML($html);
+          // Obtener el contenido del PDF
+         return $html2pdf->output('quincena.pdf');
+
+
+
+    }
+
+
+    public function quincena2(){
+
+
+		 $mes = $this->traducirMes(Carbon::now()->month);
+         $anio = Carbon::now()->year;
+
+          $data = [
+
+             'mes' =>$mes,
+             'anio'=>$anio
+         ];
+
+
+         // Renderiza la vista con los datos y convierte a HTML
+         $html = view('quincena1', $data)->render();
+
+         // Configura y genera el PDF
+         $html2pdf = new Html2Pdf('L', array(279, 432), 'es', true, 'UTF-8', array(1, 2, 1, 2));
+         $html2pdf->writeHTML($html);
+          // Obtener el contenido del PDF
+         return $html2pdf->output('quincena.pdf');
+
+
+
+    }
+
+
+
+    public function export()
+    {
+        return Excel::download(new EstatusBDTExport, 'Estatus_BDT_Telmex_Julio_2024.xlsx');
     }
 
 

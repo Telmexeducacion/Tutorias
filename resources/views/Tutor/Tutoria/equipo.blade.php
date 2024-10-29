@@ -119,12 +119,13 @@
                 </tr>
             </tbody>
         </table>
-
+<!-- Obsolecencia despues de 5 años -->
         <h3>Detalle del Equipo</h3>
         <table class="table table-bordered">
             <thead>
                 <tr>
                     <th>Equipo</th>
+                    <th>Año</th>
                     <th>Marca</th>
                     <th>Modelo</th>
                     <th>Número de Serie</th>
@@ -137,6 +138,7 @@
             <tbody>
                 <tr>
                     <td>PC</td>
+                    <th>2024</th>
                     <td>LANIX</td>
                     <td>TITAN</td>
                     <td>4040</td>
@@ -289,3 +291,4 @@
     </script>
 </body>
 </html>
+<!-- Mas de 5 años se envian a obsoletos -->

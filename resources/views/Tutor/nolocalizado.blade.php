@@ -89,10 +89,11 @@
                     <option value="Encargado ausente">Encargado ausente</option>
                 </select>
             </div>
-            <!-- Campo de observaciones -->
+          <!-- Campo de observaciones -->
             <div class="form-group">
                 <label for="observaciones">Observaciones</label>
-                <textarea class="form-control" id="observaciones" name="comentarios" rows="4"></textarea>
+                <textarea class="form-control" id="observaciones" name="comentarios" rows="4" maxlength="150"></textarea>
+                <small id="charCount" class="form-text text-muted">150 caracteres restantes</small>
             </div>
             <input type="hidden" name="id_biblioteca" value="{{$biblioteca->id}}">
 
@@ -110,6 +111,18 @@
     <!-- Resto del contenido de la página -->
 
 </body>
+<script>
+    const textarea = document.getElementById('observaciones');
+    const charCount = document.getElementById('charCount');
+
+    // Actualiza el contador al iniciar
+    charCount.textContent = `${textarea.getAttribute('maxlength')} caracteres restantes`;
+
+    textarea.addEventListener('input', function() {
+        const remaining = textarea.getAttribute('maxlength') - textarea.value.length;
+        charCount.textContent = `${remaining} caracteres restantes`;
+    });
+</script>
   <!-- Include jQuery -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <!-- Include DataTables JS -->

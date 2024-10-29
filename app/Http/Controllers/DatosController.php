@@ -9,11 +9,19 @@ use App\Dependencia;
 use App\User;
 use App\Contacto;
 use App\mobiliario;
+use App\Edificio;
+use App\Linea;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
+
 
 class DatosController extends Controller
 {
+    public function Registros($data){
+        $registros = $data;
+        
+    }
     public function FormularioBiblioteca(){
         return view('Administrador.Carga.biblioteca');
     }
@@ -35,6 +43,18 @@ class DatosController extends Controller
         return view('Administrador.Carga.mobiliario');
     }
 
+    public function FormularioEdificio(){
+        return view('Administrador.Carga.edificio');
+    }
+
+    public function FomularioLinea(){
+        return view('Administrador.Carga.lineas');
+    }
+
+
+    public function FormularioMilitar(){
+        return view('Administrador.Carga.militar');
+    }
 
 
 
@@ -179,7 +199,7 @@ public function ImportarContactos(Request $request)
 
                     return new User([
                     'name' => $row['name'] ??'',
-                'email' => $row['email'] ?? '',
+                    'email' => $row['email'] ?? '',
                     'telefono' => $row['telefono'] ?? '',
                     'celular' => $row['celular'] ?? '',
                     'password' =>  Hash::make($row['password'] ?? ''),
@@ -252,46 +272,221 @@ public function ImportarContactos(Request $request)
 
     public function ImportarMobiliario(Request $request)
     {
-        {
-            $file = $request->file('file');
-            $path = $file->getRealPath();
+        $file = $request->file('file');
+        $path = $file->getRealPath();
 
-            // Read the file and process it in chunks
-            Excel::import(new class implements \Maatwebsite\Excel\Concerns\ToModel, \Maatwebsite\Excel\Concerns\WithHeadingRow, \Maatwebsite\Excel\Concerns\WithChunkReading {
-                public function model(array $row)
-                {
-                    // Helper function to parse date or return null if not valid
-                    $parseDate = function ($date) {
-                        try {
-                            return Carbon::parse($date);
-                        } catch (\Exception $e) {
-                            return null;  // or return a default date: return Carbon::now();
-                        }
-                    };
+        // Read the file and process it in chunks
+        Excel::import(new class implements \Maatwebsite\Excel\Concerns\ToModel, \Maatwebsite\Excel\Concerns\WithHeadingRow, \Maatwebsite\Excel\Concerns\WithChunkReading {
+            public function model(array $row)
+            {
+                // Helper function to parse date or return null if not valid
+                $parseDate = function ($date) {
+                    try {
+                        return Carbon::parse($date);
+                    } catch (\Exception $e) {
+                        return null;  // or return a default date: return Carbon::now();
+                    }
+                };
 
-                    return new mobiliario([
-                    'id_biblioteca' => $row['id_biblioteca'] ??'',
+                return new Mobiliario([
+                    'id_biblioteca' => $row['id_biblioteca'] ?? null,
                     'tipo' => $row['tipo'] ?? '',
-                    'cantidad' => $row['cantidad'] ?? '',
-                    'funcional' => $row['funcional'] ?? '',
-                    'dañado' => $row['dañado'] ?? '',
-                    'faltante' => $row['faltante'] ?? '',
-                    'created_at' => $row['created_at'] ?? '',
-                    'updated_at' => $row['updated_at'] ?? '',
+                    'cantidad' => isset($row['cantidad']) ? intval($row['cantidad']) : 0,
+                    'funcional' => isset($row['funcional']) ? intval($row['funcional']) : 0,
+                    'dañado' => isset($row['dañado']) ? intval($row['dañado']) : 0,
+                    'faltante' => isset($row['faltante']) ? intval($row['faltante']) : 0,
+                    'observaciones' => $row['observaciones'] ?? '',
+                    'created_at' => $parseDate($row['created_at']) ?? now(),
+                    'updated_at' => $parseDate($row['updated_at']) ?? now(),
+                ]);
+            }
 
+            public function chunkSize(): int
+            {
+                return 1000;
+            }
+        }, $path);
 
-                    ]);
-                }
-
-                public function chunkSize(): int
-                {
-                    return 1000;
-                }
-            }, $path);
-
-            return back()->with('success', 'All good!');
-        }
+        return back()->with('success', 'All good!');
     }
+
+
+
+    public function ImportarEdificio(Request $request)
+    {
+        $file = $request->file('file');
+        $path = $file->getRealPath();
+
+         // Ensure the file is read with the correct encoding
+          \Config::set('excel.imports.heading', 'utf-8');
+
+        // Read the file and process it in chunks
+        Excel::import(new class implements \Maatwebsite\Excel\Concerns\ToModel, \Maatwebsite\Excel\Concerns\WithHeadingRow, \Maatwebsite\Excel\Concerns\WithChunkReading {
+            public function model(array $row)
+            {
+                // Helper function to parse date or return null if not valid
+                $parseDate = function ($date) {
+                    try {
+                        return Carbon::parse($date);
+                    } catch (\Exception $e) {
+                        return null;  // or return a default date: return Carbon::now();
+                    }
+                };
+
+                return new Edificio([
+                    'id_biblioteca' => $row['id_biblioteca'] ??'',
+                    'señalizacion' => $row['señalizacion'] ?? '',
+                    'edificio' => $row['edificio'] ?? '',
+                    'pintura_interior' => $row['pintura_interior'] ?? '',
+                    'pintura_exterior' => $row['pintura_exterior'] ?? '',
+                    'electricidad' => $row['electricidad'] ?? '',
+                    'mobiliario' => $row['mobiliario'] ?? '',
+                    'created_at' => $parseDate($row['created_at']) ?? now(),
+                    'updated_at' => $parseDate($row['updated_at']) ?? now(),
+                ]);
+            }
+
+            public function chunkSize(): int
+            {
+                return 1000;
+            }
+        }, $path);
+
+        return back()->with('success', 'All good!');
+    }
+
+
+
+    public function ImportarLineas(Request $request)
+    {
+        $file = $request->file('file');
+        $path = $file->getRealPath();
+
+         // Ensure the file is read with the correct encoding
+          \Config::set('excel.imports.heading', 'utf-8');
+
+        // Read the file and process it in chunks
+        Excel::import(new class implements \Maatwebsite\Excel\Concerns\ToModel, \Maatwebsite\Excel\Concerns\WithHeadingRow, \Maatwebsite\Excel\Concerns\WithChunkReading {
+            public function model(array $row)
+            {
+                // Helper function to parse date or return null if not valid
+                $parseDate = function ($date) {
+                    try {
+                        return Carbon::parse($date);
+                    } catch (\Exception $e) {
+                        return null;  // or return a default date: return Carbon::now();
+                    }
+                };
+
+                return new Linea([
+                    'id_biblioteca' => $row['id_biblioteca'] ??'',
+                    'numero' => $row['numero'] ?? '',
+                    'anchoBanda' => $row['anchoBanda'] ?? '',
+                    'tecnologia' => $row['tecnologia'] ?? '',
+                    'costo' => $row['costo'] ?? '',
+                    'created_at' => $parseDate($row['created_at']) ?? now(),
+                    'updated_at' => $parseDate($row['updated_at']) ?? now(),
+                ]);
+            }
+
+            public function chunkSize(): int
+            {
+                return 1000;
+            }
+        }, $path);
+
+        return back()->with('success', 'All good!');
+    }
+
+
+
+
+
+    public function ImportarMilitar(Request $request)
+    {
+
+        $file = $request->file('file');
+        $path = $file->getRealPath();
+
+         // Ensure the file is read with the correct encoding
+          \Config::set('excel.imports.heading', 'utf-8');
+
+
+            // Initialize an array to store the processed data
+
+
+    try {
+
+        // Read the file and process it in chunks
+        Excel::import(new class implements \Maatwebsite\Excel\Concerns\ToModel, \Maatwebsite\Excel\Concerns\WithHeadingRow, \Maatwebsite\Excel\Concerns\WithChunkReading {
+            public function model(array $row)
+            {
+                // Helper function to parse date or return null if not valid
+                $parseDate = function ($date) {
+                    try {
+                        return Carbon::parse($date);
+                    } catch (\Exception $e) {
+                        return null;  // or return a default date: return Carbon::now();
+                    }
+                };
+
+               //Codigo para excel lectura
+               $data = [];
+               $registros = [];
+               foreach ($data as $row) {
+                   $fecha = $row['Fecha'];
+                   $region_militar = $row['Región Militar'];
+                   $zona_militar = $row['Zona Militar'];
+                   $correo_electronico = $row['Correo Electrónico'];
+
+                   $key = $region_militar . '-' . $zona_militar . '-' . $fecha;
+                   if (!isset($registros[$key])) {
+                       $registros[$key] = [
+                           'Región Militar' => $region_militar,
+                           'Zona Militar' => $zona_militar,
+                           'Fecha' => $fecha,
+                           'count' => 0
+                       ];
+                   }
+                   $registros[$key]['count']++;
+               }
+
+
+                 // Convert the associative array to a collection
+            $registros = collect(array_values($registros));
+
+
+
+
+
+
+
+
+
+
+            }
+
+            public function chunkSize(): int
+            {
+                return 1000;
+            }
+        }, $path);
+
+        return view('Administrador.Carga.dinamica',compact('registros'));
+
+    } catch (Exception $e) {
+        return back()->with('error', 'Error al leer el archivo de Excel: ' . $e->getMessage());
+    }
+
+    }
+
+
+
+
+
+
+
+
 
 
 

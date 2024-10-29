@@ -170,45 +170,62 @@
 
 
 
-      <!-- Modal Contactos -->
-      <div class="modal fade" id="contactoModal" tabindex="-1" role="dialog" aria-labelledby="contactoModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="contactoModalLabel">Últimos mensajes de sitio</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <table id="exampleTable" class="table table-striped table-bordered" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>Fecha</th>
-                                <th>Tutor</th>
-                                <th>Estatus</th>
-                                <th>Mensaje</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><span id="fecha"></span></td>
-                                <td><span id="tutor"></span></td>
-                                <td><span id="estado"></span></td>
-                                <td><span id="comentarios"></span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="modal-footer">
-
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-
-                </div>
+  <!-- Modal Contactos -->
+<div class="modal fade" id="contactoModal" tabindex="-1" role="dialog" aria-labelledby="contactoModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="contactoModalLabel">Últimos mensajes de sitio</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table id="mensajes" class="table table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Tutor</th>
+                            <th>Estatus</th>
+                            <th>Mensaje</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Las filas de datos serán añadidas aquí -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
+</div>
 
+<!-- Estilos para el modal con scroll -->
+<style>
+.modal-body {
+    max-height: 400px;
+    max-width: 100%; /* Limita la altura del contenido en el modal */
+    overflow-y: auto;  /* Muestra la barra de desplazamiento si es necesario */
+}
+
+
+
+/* Evitar que el texto se divida en varias líneas para las primeras tres columnas */
+#mensajes tbody td:nth-child(1),
+#mensajes tbody td:nth-child(2),
+#mensajes tbody td:nth-child(3) {
+    white-space: nowrap;  /* Mantener el texto en una sola línea */
+    width: 1%;  /* Asegura que las columnas no se expandan innecesariamente */
+}
+
+/* Permitir que la última columna (Mensaje) use el espacio restante */
+#mensajes tbody td:nth-child(4) {
+    white-space: normal;  /* Permitir que el texto se ajuste a varias líneas */
+    width: auto;  /* Ocupar el espacio restante disponible */
+}
+</style>
 
 
 
@@ -319,15 +336,35 @@
                         method: 'GET',
 
                         success: function(data) {
-                                        // Llenar los campos del modal con los datos recibidos
+                            // Limpia el contenido actual del tbody para evitar duplicados
+                            $('#mensajes tbody').empty();
+                            console.log(data);
+                            // Asegúrate de que "data" sea un array, de lo contrario, manejar el error
+                            if (Array.isArray(data)) {
+                                // Recorre el array de datos que recibes en la respuesta y añade una fila por cada entrada
+                                data.forEach(function(item) {
+                                    let row = `
+                                        <tr>
+                                            <td>${item.fecha || 'N/A'}</td>
+                                            <td>${item.tutor || 'N/A'}</td>
+                                            <td>${item.estado || 'N/A'}</td>
+                                            <td>${item.comentarios || 'N/A'}</td>
+                                        </tr>
+                                    `;
 
-
-                           $('#fecha').text(data.fecha || 'N/A');
-                           $('#tutor').text(data.tutor || 'N/A');
-                           $('#estado').text(data.estado || 'N/A');
-                           $('#comentarios').text(data.comentarios || 'N/A');
-
+                                    // Añade la fila al cuerpo de la tabla
+                                    $('#mensajes tbody').append(row);
+                                });
+                            } else {
+                                // Si "data" no es un array, muestra un mensaje de error o un aviso
+                                console.error('Los datos recibidos no son un array');
+                            }
                         },
+
+
+
+
+
                         error: function(xhr, status, error) {
                             console.error("Error al obtener los datos de contacto:", error);
                             alert( error);

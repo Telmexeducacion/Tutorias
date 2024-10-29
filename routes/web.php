@@ -41,18 +41,26 @@ Route::get('/Pruebas/form','pruebasController@formularioTelegram')->name('prueba
 
 
 Route::get('/Tutoria/sede/{sede}','tutoriaController@panelInicio')->name('panel.tutoria');
+
 Route::get('/Tutoria/Internet/{sede}','tutoriaController@panelConectividad')->name('tutoria.internet');
 Route::get('/Tutoria/incidencias/{sede}','tutoriaController@panelIncidencia')->name('tutoria.insidencia');
 Route::get('/Tutoria/aplicacion/{sede}','tutoriaController@usobdt')->name('tutoria.uso');
+
+
+
 Route::get('/Tutoria/Equipos/{sede}','tutoriaController@equipos')->name('tutoria.equipos');
+
 Route::get('/Tutoria/Edificio/{sede}','tutoriaController@edificio')->name('tutoria.edificio');
+Route::PUT('/Tutoria/update/Mobiliario','tutoriaController@UpdateMobiliario')->name('actualizar.mobiliario');
+Route::post('/Tutoria/Edificio','tutoriacontroller@estadoEdificio')->name('actualizar.edificio');
+
+
 Route::get('/Tutoria/VerFicha/{sede}','tutoriaController@ficha')->name('tutoria.ficha');
 
 Route::get('contacto{clave}','tutoresController@getContactos')->name('getContactos');
 Route::get('historico{clave}','tutoresController@getHistorico')->name('getHistorico');
 
-// modal pruebas
-// Route::get('/ejemplo1/{id}','tutoresController@HistoricoBDT');
+
 
 
 
@@ -72,9 +80,35 @@ Route::post('/carga/info','DatosController@ImportarInfo')->name('import.info');
 Route::get('/info/mobiliario','DatosController@FormularioMobiliario')->name('carga.mobiliario');
 Route::post('/carga/mobiliario','DatosController@ImportarMobiliario')->name('import.mobiliario');
 
+Route::get('/info/edificio','DatosController@FormularioEdificio')->name('carga.edificio');
+Route::post('/carga/edificio','DatosController@ImportarEdificio')->name('import.edificio');
+
+
+Route::get('/carga/lineas','DatosController@FomularioLinea')->name('carga.linea');
+Route::post('/carga/linea','DatosController@ImportarLineas')->name('import.linea');
+
+Route::get('/Carga/Educativo','DatosController@FormularioMilitar')->name('carga.militar');
+Route::post('/carga/Militar','DatosController@ImportarMilitar')->name('import.militar');
+
+
+
 
 Route::get('/ficha/{clavebdt}','ReporteController@inicio')->name('ficha.externa');
 
+Route::get('/Panelreportes','ReporteController@panel');
+Route::get('/reporteSemana','ReporteController@semana')->name('reporte.semana');
+Route::get('/reporte/quincena','ReporteController@quincena')->name('reporte.quincena');
+Route::get('/reporte/quincena2','ReporteController@quincena2')->name('reporte.quincena1');
+Route::get('/Exportar/estatus-bdt', 'ReporteController@export')->name('reporte.excel');
 
 
 
+
+
+
+////pruevas
+
+Route::get('/sedesinternas','pruebasController@datos');
+Route::get('/sedesExternas','pruebasController@datoss');
+
+Route::get('/reportebiblioteca','pruebasController@reporte');

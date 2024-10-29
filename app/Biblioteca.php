@@ -84,4 +84,12 @@ class Biblioteca extends Model
     }
 
 
+
+    public function edificios()
+    {
+        return $this->hasMany(Edificio::class, 'id_biblioteca');
+    }
+
+
+
 }
