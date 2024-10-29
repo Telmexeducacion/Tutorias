@@ -136,7 +136,7 @@
                     <label for="observaciones">Observaciones:</label>
                     <textarea class="form-control" id="observaciones" rows="3"></textarea>
                 </div>
-                <button class="btn btn-primary btn-block">Guardar y Continuar</button>
+                <a class="btn btn-primary btn-block" href="{{route('tutoria.edificio',$sede->clavebdt )}}">Guardar y Continuar</a>
             </div>
         </div>
     </div>

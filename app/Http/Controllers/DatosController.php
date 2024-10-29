@@ -11,6 +11,8 @@ use App\Contacto;
 use App\mobiliario;
 use App\Edificio;
 use App\Linea;
+use App\tecnologia;
+use App\semaforo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
@@ -20,7 +22,7 @@ class DatosController extends Controller
 {
     public function Registros($data){
         $registros = $data;
-        
+
     }
     public function FormularioBiblioteca(){
         return view('Administrador.Carga.biblioteca');
@@ -47,8 +49,17 @@ class DatosController extends Controller
         return view('Administrador.Carga.edificio');
     }
 
+    public function FormularioTecnologia(){
+        return view('Administrador.Carga.tecnologias');
+    }
+
     public function FomularioLinea(){
         return view('Administrador.Carga.lineas');
+    }
+
+
+    public function FormSemaforo(){
+        return view('Administrador.Carga.semaforo');
     }
 
 
@@ -380,10 +391,9 @@ public function ImportarContactos(Request $request)
 
                 return new Linea([
                     'id_biblioteca' => $row['id_biblioteca'] ??'',
+                    'id_tecnologia' => $row['id_tecnologia'] ?? '',
                     'numero' => $row['numero'] ?? '',
-                    'anchoBanda' => $row['anchoBanda'] ?? '',
-                    'tecnologia' => $row['tecnologia'] ?? '',
-                    'costo' => $row['costo'] ?? '',
+                    'anchobanda' => $row['anchobanda'] ?? '',
                     'created_at' => $parseDate($row['created_at']) ?? now(),
                     'updated_at' => $parseDate($row['updated_at']) ?? now(),
                 ]);
@@ -479,6 +489,92 @@ public function ImportarContactos(Request $request)
     }
 
     }
+
+
+
+
+
+
+    public function ImportarTecnologia(Request $request)
+    {
+        $file = $request->file('file');
+        $path = $file->getRealPath();
+
+         // Ensure the file is read with the correct encoding
+          \Config::set('excel.imports.heading', 'utf-8');
+
+        // Read the file and process it in chunks
+        Excel::import(new class implements \Maatwebsite\Excel\Concerns\ToModel, \Maatwebsite\Excel\Concerns\WithHeadingRow, \Maatwebsite\Excel\Concerns\WithChunkReading {
+            public function model(array $row)
+            {
+                // Helper function to parse date or return null if not valid
+                $parseDate = function ($date) {
+                    try {
+                        return Carbon::parse($date);
+                    } catch (\Exception $e) {
+                        return null;  // or return a default date: return Carbon::now();
+                    }
+                };
+
+                return new tecnologia([
+                    'nombre' => $row['nombre'] ??'',
+                    'detalle' => $row['detalle'] ??'',
+                    'created_at' => $parseDate($row['created_at']) ?? now(),
+                    'updated_at' => $parseDate($row['updated_at']) ?? now(),
+                ]);
+            }
+
+            public function chunkSize(): int
+            {
+                return 1000;
+            }
+        }, $path);
+
+        return back()->with('success', 'All good!');
+    }
+
+
+
+    public function importSemaforo(Request $request)
+    {
+        $file = $request->file('file');
+        $path = $file->getRealPath();
+
+         // Ensure the file is read with the correct encoding
+          \Config::set('excel.imports.heading', 'utf-8');
+
+        // Read the file and process it in chunks
+        Excel::import(new class implements \Maatwebsite\Excel\Concerns\ToModel, \Maatwebsite\Excel\Concerns\WithHeadingRow, \Maatwebsite\Excel\Concerns\WithChunkReading {
+            public function model(array $row)
+            {
+                // Helper function to parse date or return null if not valid
+                $parseDate = function ($date) {
+                    try {
+                        return Carbon::parse($date);
+                    } catch (\Exception $e) {
+                        return null;  // or return a default date: return Carbon::now();
+                    }
+                };
+
+                return new semaforo([
+                    'estatus' => $row['estatus'] ??'',
+                    'lim_bajo' => $row['lim_bajo'] ??'',
+                    'lim_alto' => $row['lim_alto'] ??'',
+                    'created_at' => $parseDate($row['created_at']) ?? now(),
+                    'updated_at' => $parseDate($row['updated_at']) ?? now(),
+                ]);
+            }
+
+            public function chunkSize(): int
+            {
+                return 1000;
+            }
+        }, $path);
+
+        return back()->with('success', 'All good!');
+    }
+
+
 
 
 

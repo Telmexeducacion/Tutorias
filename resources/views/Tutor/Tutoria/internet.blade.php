@@ -102,37 +102,37 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>78459875474</td>
-                    <td>12</td>
-                    <td>FTTH</td>
-                    <td>120.12</td>
-                    <td>56.45</td>
-                    <td>BAJO</td>
-                    <td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#reportModal" onclick="setLine('78459875474')">Reportar</button></td>
+                @foreach ($sede->lineas as $linea)
+
+
+              <tr>
+                    <td> {{$linea->numero}}</td>
+                    <td>{{$linea->anchobanda}} MB</td>
+
+                    <td>{{$linea->tecnologia->nombre}}</td>
+
+
+                    <td>{{$linea->recibidos($linea->id,'AGOSTO','2024')}}</td>
+                    <td>{{$linea->enviados($linea->id,'AGOSTO','2024')}}</td>
+                    <td>{{$linea->semaforo($linea->id,'AGOSTO','2024')}}</td>
+                    <td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#reportModal" onclick="setLine('{{$linea->numero}}')">Reportar</button></td>
                 </tr>
-                <tr>
-                    <td>4865785474</td>
-                    <td>20</td>
-                    <td>FTTH</td>
-                    <td>220.12</td>
-                    <td>89.2</td>
-                    <td>BAJO</td>
-                    <td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#reportModal" onclick="setLine('4865785474')">Reportar</button></td>
-                </tr>
+
+            -->
+            @endforeach
             </tbody>
         </table>
         <div class="row mt-4">
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="aportaConectividad">Aporta Conectividad:</label>
-                    <input type="text" class="form-control" id="aportaConectividad" value="AYUNTAMIENTO DE VALLADOLID" readonly>
+                    <input type="text" class="form-control" id="aportaConectividad"  readonly>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="pagaConectividad">Paga Conectividad:</label>
-                    <input type="text" class="form-control" id="pagaConectividad" value="INSTITUCIÓN / GOBIERNO" readonly>
+                    <input type="text" class="form-control" id="pagaConectividad"  readonly>
                 </div>
             </div>
         </div>
@@ -140,19 +140,19 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="gbRecibidos">Promedio Mensual GB recibidos:</label>
-                    <input type="text" class="form-control" id="gbRecibidos" value="166.79" readonly>
+                    <input type="text" class="form-control" id="gbRecibidos" value="{{$sede->recibidos($sede->id)}}" readonly>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="gbEnviados">Promedio Mensual GB Enviados:</label>
-                    <input type="text" class="form-control" id="gbEnviados" value="13.61" readonly>
+                    <input type="text" class="form-control" id="gbEnviados" value="{{$sede->enviados($sede->id)}}" readonly>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="semaforoUso">Semáforo de uso:</label>
-                    <input type="text" class="form-control" id="semaforoUso" value="BAJO" readonly>
+                    <input type="text" class="form-control" id="semaforoUso" value="{{$sede->semaforo($sede->id)}}"   readonly>
                 </div>
             </div>
         </div>
@@ -226,6 +226,9 @@
                                 </tr>
                             </thead>
                             <tbody>
+
+
+                                <!--
                                 <tr>
                                     <td>78459875474</td>
                                     <td>12</td>
@@ -242,6 +245,7 @@
                                     <td>89.2</td>
                                     <td>BAJO</td>
                                 </tr>
+                            -->
                             </tbody>
                         </table>
                         <div class="form-group">
@@ -251,12 +255,13 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Guardar</button>
+                    <a type="button" href="{{route('tutoria.uso',$sede->clavebdt)}}" class="btn btn-primary" >Guardar</a>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>
     </div>
+
 
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

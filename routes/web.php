@@ -5,9 +5,6 @@
 | Web Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
 |
 */
 Auth::routes();
@@ -40,11 +37,11 @@ Route::get('/Pruebas/form','pruebasController@formularioTelegram')->name('prueba
 
 
 
-Route::get('/Tutoria/sede/{sede}','tutoriaController@panelInicio')->name('panel.tutoria');
+//Route::get('/Tutoria/sede/{sede}','tutoriaController@panelInicio')->name('panel.tutoria');
 
-Route::get('/Tutoria/Internet/{sede}','tutoriaController@panelConectividad')->name('tutoria.internet');
+Route::get('/Tutoria/Internet/{sede}','tutoriaController@panelConectividad')->name('panel.tutoria');  //OK
 Route::get('/Tutoria/incidencias/{sede}','tutoriaController@panelIncidencia')->name('tutoria.insidencia');
-Route::get('/Tutoria/aplicacion/{sede}','tutoriaController@usobdt')->name('tutoria.uso');
+Route::get('/Tutoria/aplicacion/{sede}','tutoriaController@usobdt')->name('tutoria.uso'); //ok
 
 
 
@@ -83,12 +80,31 @@ Route::post('/carga/mobiliario','DatosController@ImportarMobiliario')->name('imp
 Route::get('/info/edificio','DatosController@FormularioEdificio')->name('carga.edificio');
 Route::post('/carga/edificio','DatosController@ImportarEdificio')->name('import.edificio');
 
+Route::get('/form/tecnologia','DatosController@FormularioTecnologia')->name('carga.tecnologia');
+Route::post('/carga/tecnologia','DatosController@ImportarTecnologia')->name('import.tecnologia');
+
 
 Route::get('/carga/lineas','DatosController@FomularioLinea')->name('carga.linea');
 Route::post('/carga/linea','DatosController@ImportarLineas')->name('import.linea');
 
+Route::get('/form/semaforo','DatosController@FormSemaforo')->name('carga.semaforo');
+Route::post('/carga/semaforo','DatosController@importSemaforo')->name('import.semaforo');
+
+
+Route::get('/form/Medicion/Mes','LineasController@FormularioLineas')->name('form.mediciones');
+Route::post('/carga/Medicion/mes','LineasController@ImportarLineas')->name('import.mediciones');
+
+Route::get('/form/Promedio/Mes','LineasController@FormularioPromedio')->name('form.promedio');
+Route::post('/carga/promedio/mes','LineasController@ImportarPromedio')->name('import.promedio');
+
+Route::get('/reporte/Internet','LineasController@Reporte')->name('reporte.internet');
+Route::get('/reporte/Internet/pdf','LineasController@PdfInternet')->name('internet.pdf.sedena');
+
+
 Route::get('/Carga/Educativo','DatosController@FormularioMilitar')->name('carga.militar');
 Route::post('/carga/Militar','DatosController@ImportarMilitar')->name('import.militar');
+
+
 
 
 
@@ -106,9 +122,10 @@ Route::get('/Exportar/estatus-bdt', 'ReporteController@export')->name('reporte.e
 
 
 
-////pruevas
+
+////pruebas
 
 Route::get('/sedesinternas','pruebasController@datos');
 Route::get('/sedesExternas','pruebasController@datoss');
-
 Route::get('/reportebiblioteca','pruebasController@reporte');
+Route::get('/reporteData','ReporteController@ReporteData');

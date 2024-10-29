@@ -16,10 +16,11 @@ class CreateLineasTable extends Migration
         Schema::create('lineas', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('id_biblioteca');
+            $table->unsignedInteger('id_tecnologia');
             $table->string('numero')->unique();
-            $table->string('anchoBanda');
-            $table->enum('tecnologia',['FO','CO','ENLACE']);
+            $table->double('anchobanda');
             $table->foreign('id_biblioteca')->references('id')->on('bibliotecas')->onDelete('cascade');
+            $table->foreign('id_tecnologia')->references('id')->on('tecnologias')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -16,11 +16,11 @@ class CreatePromediointernetsTable extends Migration
         Schema::create('promediointernets', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('id_biblioteca');
-            $table->string('subida');
-            $table->string('bajada');
-            $table->string('semaforo');
+            $table->unsignedInteger('id_semaforo');
+            $table->string('enviado');
+            $table->string('recibidos');
             $table->string('anio');
-            $table->string('mes');
+            $table->foreign('id_semaforo')->references('id')->on('semaforos')->onDelete('cascade');
             $table->foreign('id_biblioteca')->references('id')->on('bibliotecas')->onDelete('cascade');
             $table->timestamps();
         });

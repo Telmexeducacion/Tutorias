@@ -13,15 +13,16 @@ class CreateMedicionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('medicions', function (Blueprint $table) {
+        Schema::create('mediciones', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('id_linea');
-            $table->string('subida');
-            $table->string('bajada');
-            $table->string('semaforo');
+            $table->unsignedInteger('id_semaforo');
+            $table->string('enviados');
+            $table->string('recibidos');
             $table->string('anio');
             $table->string('mes');
             $table->foreign('id_linea')->references('id')->on('lineas')->onDelete('cascade');
+            $table->foreign('id_semaforo')->references('id')->on('semaforos')->onDelete('cascade');
             $table->timestamps();
         });
     }

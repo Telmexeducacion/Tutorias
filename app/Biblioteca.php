@@ -90,6 +90,36 @@ class Biblioteca extends Model
         return $this->hasMany(Edificio::class, 'id_biblioteca');
     }
 
+        /**
+     * Relación con el modelo Linea.
+     * Una biblioteca puede tener varias líneas.
+     */
+    public function lineas()
+    {
+        return $this->hasMany(Linea::class, 'id_biblioteca');
+    }
+
+
+    // Relación con la tabla promediointernets
+    public function promedioInternet()
+    {
+        return $this->hasMany(PromedioInternet::class, 'id_biblioteca');
+    }
+
+    public function recibidos($id){
+        $dato = PromedioInternet::where('id_biblioteca',$id)->first();
+        return $dato->recibidos;
+    }
+    public function enviados($id){
+        $dato = PromedioInternet::where('id_biblioteca',$id)->first();
+        return $dato->enviado;
+    }
+    public function semaforo($id){
+        $dato = PromedioInternet::where('id_biblioteca',$id)->first();
+        return $dato->semaforo->estatus;
+    }
+
+
 
 
 }

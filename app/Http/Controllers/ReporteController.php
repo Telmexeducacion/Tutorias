@@ -77,6 +77,176 @@ class ReporteController extends Controller{
     }
 
 
+    public function ReporteData(){
+        $data = '{
+    "BDT Externas": {
+        "Resumen": {
+            "BDT Externas": 775,
+            "Casas Telmex": 11
+        },
+        "Activas": {
+            "Total": 106,
+            "Externas": {
+                "Centros comunitarios, Bibliotecas públicas y municipales, museos, escuelas": 103
+            },
+            "Internas": {
+                "Casas TELMEX": 3
+            }
+        },
+        "Cerradas": {
+            "Total": 680,
+            "Externas": {
+                "Centros comunitarios, Bibliotecas públicas y municipales, museos, escuelas": 672
+            },
+            "Internas": {
+                "Casas TELMEX": 8
+            }
+        },
+        "Internet": {
+            "Activas": {
+                "Promedio": "191.30 GB",
+                "BDT con líneas y enlace pagado por la entidad": {
+                    "BDT": 92,
+                    "Líneas": 102,
+                    "Enlace": 1
+                },
+                "BDT con líneas y enlace pagado por Telmex": {
+                    "BDT": 14,
+                    "Líneas": 24,
+                    "Enlace": 1
+                },
+                "Consumo": {
+                    "Sin consumo": 3,
+                    "Bajo": 53,
+                    "Medio": 29,
+                    "Alto": 10,
+                    "Heavy": 11
+                },
+                "Costos": {
+                    "Sin consumo": 51289,
+                    "Bajo consumo": 63514,
+                    "Medio consumo": 150920.06,
+                    "Alto consumo": 26243.24
+                }
+            },
+            "Cerradas": {
+                "Promedio": "48.23 GB",
+                "BDT con líneas pagadas por la entidad": {
+                    "BDT": 569,
+                    "Líneas": 346
+                },
+                "BDT con líneas pagadas por Telmex": {
+                    "BDT": 8,
+                    "Líneas": 51
+                },
+                "Consumo": {
+                    "Sin consumo": 378,
+                    "Bajo": 131,
+                    "Medio": 53,
+                    "Alto": 10,
+                    "Heavy": 5
+                },
+                "Costos": {
+                    "Sin consumo": 150920.06,
+                    "Bajo consumo": 26243.24
+                }
+            }
+        },
+        "Equipamiento": {
+            "Activas": {
+                "Inventario Inicial": 3020,
+                "Funcional": 1913,
+                "Faltante": 78,
+                "Dañado u obsoleto": 1029
+            },
+            "Cerradas": {
+                "Inventario Inicial": 17834,
+                "Funcional": 8585,
+                "Faltante": 2696,
+                "Dañado u obsoleto": 6553
+            }
+        },
+        "Mobiliario": {
+            "Activas": {
+                "Inventario Inicial": 4123,
+                "Inventario Actual": 4123
+            },
+            "Cerradas": {
+                "Inventario Inicial": 13986,
+                "Inventario Actual": 6076
+            }
+        },
+        "Convenios": {
+            "Activas": {
+                "Indeterminado": 102,
+                "Vencido": 3,
+                "Vigente": 1
+            },
+            "Cerradas": {
+                "Indeterminado": 528,
+                "Vencido": 43,
+                "Sin Convenio": 6
+            }
+        },
+        "Motivos de Cierre": {
+            "Equipos Obsoletos": 157,
+            "Equipos Extraviados o Dañados": 185,
+            "Daño a Infraestructura por Sinestro": 22,
+            "Reubicación": 2,
+            "Otro": {
+                "Casos": 211,
+                "Notas": "Baja del internet, cambio de administración, desmantelada, equipos dañados, reubicación, etc."
+            }
+        },
+        "Acciones": {
+            "Agregadas": [
+                "Talleres en Línea y Presenciales",
+                "Oferta Educativa"
+            ],
+            "Solicitudes Recibidas": {
+                "Nuevas Instalaciones": "Instalar nuevas BDT o Donaciones",
+                "Retiro": "Solicitudes de Retiro de Equipos",
+                "Boletos PE": "Solicitudes de Boletos"
+            },
+            "Acciones Externas": [
+                "Verificación mensual por videollamada",
+                "Visitas presenciales a BDT sin contacto",
+                "Monitoreo periódico de conectividad",
+                "Actualización mensual de oferta educativa",
+                "Actualización tecnológica: 74 BDT, $5,051,689"
+            ],
+            "Criterios de Cierre": [
+                "Internet con otro proveedor",
+                "Sedes sin equipos funcionales",
+                "Menos de 5 equipos"
+            ]
+        },
+        "Costo de Desmontaje": 6143.09
+    },
+    "Uso/Registros 2024": {
+        "De Enero a Mayo": {
+            "Centros Telmex": 3,
+            "BDT Externas": 39,
+            "Total": 42,
+            "Registros en Sistema": {
+                "Centros Telmex": 127385,
+                "BDT Externas": 88073
+            }
+        }
+    }
+}';
+
+$reporte = json_decode($data);
+
+
+        return response()->json($data);
+
+
+
+
+    }
+
+
 
 
 
